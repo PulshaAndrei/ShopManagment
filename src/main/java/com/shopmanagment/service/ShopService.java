@@ -13,5 +13,11 @@ public interface ShopService {
 
     public boolean create(Shop shop);
 
+    public boolean update(Shop shop);
+
+    public boolean delete(long id);
+
     public List<Shop> getShops();
+
+    public Shop getShop(long id);
 }

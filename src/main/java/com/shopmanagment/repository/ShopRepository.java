@@ -21,5 +21,5 @@ public interface ShopRepository<V extends DomainObject> {
 
     void update(V object);
 
-    void delete(V object);
+    void delete(long id);
 }

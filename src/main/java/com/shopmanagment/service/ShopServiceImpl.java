@@ -36,7 +36,34 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    public boolean update(Shop shop) {
+        try {
+            shopRepository.update(shop);
+            return true;
+        } catch (Exception e) {
+            LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(long id) {
+        try {
+            shopRepository.delete(id);
+            return true;
+        } catch (Exception e) {
+            LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
+            return false;
+        }
+    }
+
+    @Override
     public List<Shop> getShops() {
         return shopRepository.getShops();
+    }
+
+    @Override
+    public Shop getShop(long id) {
+        return shopRepository.getShop(id);
     }
 }

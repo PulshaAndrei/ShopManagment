@@ -26,17 +26,13 @@ public class ShopRepositoryImpl implements ShopRepository<Shop> {
 
     @Override
     public void update(Shop object) {
-        Object[] params = new Object[] { object.getId(), object.getName(), object.getAddress(), object.getTime() };
-        int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR };
-
-        jdbcOperations.update("UPDATE shop SET (cast(? as UUID), ?)\n" +
-                "   WHERE id = '" + object.getId() + "';", params, types);
+       jdbcOperations.update("UPDATE shop SET name = ?, address = ?, time = ? WHERE id = ?;",
+                object.getName(), object.getAddress(), object.getTime(), object.getId());
     }
 
     @Override
-    public void delete(Shop object) {
-        jdbcOperations.update("DELETE FROM shop\n" +
-                " WHERE id = '" + object.getId() + "';");
+    public void delete(long id) {
+        jdbcOperations.update("DELETE FROM shop WHERE id = ?;", id);
     }
 
     @Override
@@ -55,11 +51,15 @@ public class ShopRepositoryImpl implements ShopRepository<Shop> {
 
     @Override
     public Shop getShop(long id) {
-        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop WHERE id == ?;", id);
-        return new Shop(
-                rowSet.getLong("id"),
-                rowSet.getString("name"),
-                rowSet.getString("address"),
-                rowSet.getString("time"));
+        List<Shop> result = new ArrayList<>();
+        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop WHERE id = ?;", id);
+        while (rowSet.next()) {
+            result.add(new Shop(
+                    rowSet.getLong("id"),
+                    rowSet.getString("name"),
+                    rowSet.getString("address"),
+                    rowSet.getString("time")));
+        }
+        return result.get(0);
     }
 }
