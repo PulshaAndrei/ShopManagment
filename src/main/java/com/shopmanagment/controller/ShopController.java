@@ -64,7 +64,6 @@ public class ShopController extends ExceptionHandlerController {
     @RequestMapping(value = "/shop/{shop_id}", method = RequestMethod.PUT, headers = {"Content-type=application/json"} )
     public @ResponseBody
     Map<String, Object> update(@PathVariable("shop_id") long id, @RequestBody Shop shop)  throws RestException {
-        Logger.getLogger(ExceptionHandlerController.class).debug(shop.toString());
         try {
             if (shop.getName() == null || shop.getName() == "") {
                 return Ajax.errorResponse("Field name can't be empty.");
