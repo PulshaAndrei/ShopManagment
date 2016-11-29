@@ -3,7 +3,6 @@ package com.shopmanagment.service;
 import com.shopmanagment.entity.Shop;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Andrei on 27.11.2016.

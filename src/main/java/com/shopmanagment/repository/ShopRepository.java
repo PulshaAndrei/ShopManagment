@@ -4,8 +4,6 @@ import com.shopmanagment.entity.DomainObject;
 import com.shopmanagment.entity.Shop;
 
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * Created by Andrei on 27.11.2016.

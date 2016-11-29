@@ -1,7 +1,5 @@
 package com.shopmanagment.entity;
 
-import java.util.UUID;
-
 /**
  * Created by Andrei on 27.11.2016.
  */
