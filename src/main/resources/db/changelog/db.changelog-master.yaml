@@ -2,28 +2,3 @@ databaseChangeLog:
   - changeSet:
       id: 2
       author: pulsha.andrei
-      changes:
-        - createTable:
-            tableName: product
-            columns:
-              - column:
-                  name: id
-                  type: serial
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: shop_id
-                  type: integer
-                  constraints:
-                    nullable: false
-              - column:
-                  name: name
-                  type: text
-                  constraints:
-                     nullable: false
-              - column:
-                  name: description
-                  type: text
-                  constraints:
-                    nullable: true
