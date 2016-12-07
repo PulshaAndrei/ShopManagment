@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 3
+      id: 1
       author: pulsha.andrei
       changes:
         - createTable:
-          tableName: shop
+            tableName: shop
             columns:
               - column:
                   name: id
