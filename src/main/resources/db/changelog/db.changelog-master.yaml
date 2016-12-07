@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 2
       author: pulsha.andrei
       changes:
         - createTable:
-            tableName: shop
+            tableName: product
             columns:
               - column:
                   name: id
@@ -13,17 +13,17 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: name
-                  type: text
+                  name: shop_id
+                  type: integer
                   constraints:
                     nullable: false
               - column:
-                  name: address
+                  name: name
                   type: text
                   constraints:
-                     nullable: true
+                     nullable: false
               - column:
-                  name: time
+                  name: description
                   type: text
                   constraints:
                     nullable: true
