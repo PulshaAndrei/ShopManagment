@@ -15,6 +15,7 @@ import java.util.Map;
  * Created by Andrei on 27.11.2016.
  */
 
+@CrossOrigin(origins = "*")
 @Controller
 public class ShopController extends ExceptionHandlerController {
 
@@ -23,7 +24,6 @@ public class ShopController extends ExceptionHandlerController {
     @Autowired
     @Qualifier("shopService")
     private ShopService shopService;
-
 
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
     public @ResponseBody
