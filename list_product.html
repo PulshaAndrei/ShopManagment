@@ -1,0 +1,29 @@
+<div class="page-header">
+	<h1>Список товаров магазина "{{shop.Name}}"</h1>
+	<a href="#/new_product/{{shop.Id}}" class="btn btn-success btn-right">Добавить</a>
+</div>
+<div class="page-header">	
+	<table class="table table-striped table-hover ">
+		<thead>
+			<tr>
+				<th>Наименование товара</th>
+				<th>Описание</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="product in products">
+				<td>{{product.Name}}</td>
+				<td>{{product.Description}}</td>
+				<td><a href="#/edit_product/{{shop.Id}}/{{product.Id}}" class="btn btn-primary">Редактировать</a></td>
+				<td><a href="#/destroy_product/{{shop.Id}}/{{product.Id}}" class="btn btn-danger">Удалить</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="#/" class="btn btn-default">К списку магазинов</a>
+</div>
+<div class="page-header">
+	<h1>Адрес магазина: {{shop.Adress}}</h1>
+</div>
+<div id="map"></div>
