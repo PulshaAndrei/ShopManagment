@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 2
+      id: 1
       author: pulsha.andrei
       changes:
         - createTable:
