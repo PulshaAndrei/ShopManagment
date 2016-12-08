@@ -41,8 +41,8 @@ public class ProductRepositoryImpl implements ProductRepository<Product> {
         SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM product WHERE shop_id =? ORDER BY id;", shop_id);
         while (rowSet.next()) {
             result.add(new Product(
-                    rowSet.getLong("shop_id"),
                     rowSet.getLong("id"),
+                    rowSet.getLong("shop_id"),
                     rowSet.getString("name"),
                     rowSet.getString("description")));
         }
@@ -55,8 +55,8 @@ public class ProductRepositoryImpl implements ProductRepository<Product> {
         SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM product WHERE shop_id = ? AND id = ?;", shop_id, id);
         while (rowSet.next()) {
             result.add(new Product(
-                    rowSet.getLong("shop_id"),
                     rowSet.getLong("id"),
+                    rowSet.getLong("shop_id"),
                     rowSet.getString("name"),
                     rowSet.getString("description")));
         }
