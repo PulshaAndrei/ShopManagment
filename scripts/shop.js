@@ -13,7 +13,7 @@ angular.module('shop', [])
       otherwise({redirectTo:'/'});
   });
 
-var serverURL = "http://localhost:8080/"//https://shopmanagment.herokuapp.com/"
+var serverURL = "https://shopmanagment.herokuapp.com/" //"http://localhost:8080/"
 
 function ShopListCtrl($scope, $rootScope, $location, $http) {
   $http.get(serverURL+'shop').success(function(data) {
