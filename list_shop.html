@@ -15,13 +15,13 @@
 			</tr>
 		</thead>
 		<tbody id="sortable">
-			<tr ng-repeat="shop in shops | orderBy: 'Id'" class="ui-state-default" id="{{shop.Id}}">
-				<td>{{shop.Id}}</td>
-				<td><a href="#/products/{{shop.Id}}">{{shop.Name}}</a></td>
-				<td>{{shop.Adress}}</td>
-				<td>{{shop.Time}}</td>
-				<td><a href="#/edit_shop/{{shop.Id}}" class="btn btn-primary">Редактировать</a></td>
-				<td><a href="#/destroy_shop/{{shop.Id}}" class="btn btn-danger">Удалить</a></td>
+			<tr ng-repeat="shop in shops | orderBy: 'id'" class="ui-state-default" id="{{shop.id}}">
+				<td>{{shop.id}}</td>
+				<td><a href="#/products/{{shop.id}}">{{shop.name}}</a></td>
+				<td>{{shop.address}}</td>
+				<td>{{shop.time}}</td>
+				<td><a href="#/edit_shop/{{shop.id}}" class="btn btn-primary">Редактировать</a></td>
+				<td><a href="#/destroy_shop/{{shop.id}}" class="btn btn-danger">Удалить</a></td>
 			</tr>
 		</tbody>
 	</table>
