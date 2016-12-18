@@ -7,6 +7,11 @@ databaseChangeLog:
             tableName: shop
             columns:
               - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
                   name: id
                   type: serial
                   constraints:
@@ -31,6 +36,11 @@ databaseChangeLog:
             tableName: product
             columns:
               - column:
+                  name: user_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
                   name: id
                   type: serial
                   constraints:
@@ -51,3 +61,22 @@ databaseChangeLog:
                   type: text
                   constraints:
                     nullable: true
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: text
+                  constraints:
+                    nullable: false

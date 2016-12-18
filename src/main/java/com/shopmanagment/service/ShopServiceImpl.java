@@ -23,9 +23,9 @@ public class ShopServiceImpl implements ShopService {
     private ShopRepository shopRepository;
 
     @Override
-    public boolean create(Shop shop) {
+    public boolean create(long user_id, Shop shop) {
         try {
-            shopRepository.create(shop);
+            shopRepository.create(user_id, shop);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -34,9 +34,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public boolean update(Shop shop) {
+    public boolean update(long user_id, Shop shop) {
         try {
-            shopRepository.update(shop);
+            shopRepository.update(user_id, shop);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -45,9 +45,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public boolean delete(long id) {
+    public boolean delete(long user_id, long id) {
         try {
-            shopRepository.delete(id);
+            shopRepository.delete(user_id, id);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -56,12 +56,12 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Shop> getShops() {
-        return shopRepository.getShops();
+    public List<Shop> getShops(long user_id) {
+        return shopRepository.getShops(user_id);
     }
 
     @Override
-    public Shop getShop(long id) {
-        return shopRepository.getShop(id);
+    public Shop getShop(long user_id, long id) {
+        return shopRepository.getShop(user_id, id);
     }
 }

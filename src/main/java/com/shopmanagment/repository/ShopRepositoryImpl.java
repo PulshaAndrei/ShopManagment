@@ -20,25 +20,25 @@ public class ShopRepositoryImpl implements ShopRepository<Shop> {
     protected JdbcOperations jdbcOperations;
 
     @Override
-    public void create(Shop object) {
-        jdbcOperations.update("INSERT INTO shop (name, address, time) VALUES (?, ?, ?);", object.getName(), object.getAddress(), object.getTime());
+    public void create(long user_id, Shop object) {
+        jdbcOperations.update("INSERT INTO shop (user_id, name, address, time) VALUES (?, ?, ?, ?);", user_id, object.getName(), object.getAddress(), object.getTime());
     }
 
     @Override
-    public void update(Shop object) {
-       jdbcOperations.update("UPDATE shop SET name = ?, address = ?, time = ? WHERE id = ?;",
-                object.getName(), object.getAddress(), object.getTime(), object.getId());
+    public void update(long user_id, Shop object) {
+       jdbcOperations.update("UPDATE shop SET name = ?, address = ?, time = ? WHERE user_id = ? AND id = ?;",
+               object.getName(), object.getAddress(), object.getTime(), user_id, object.getId());
     }
 
     @Override
-    public void delete(long id) {
-        jdbcOperations.update("DELETE FROM shop WHERE id = ?;", id);
+    public void delete(long user_id, long id) {
+        jdbcOperations.update("DELETE FROM shop WHERE user_id = ? AND id = ?;", user_id, id);
     }
 
     @Override
-    public List<Shop> getShops() {
+    public List<Shop> getShops(long user_id) {
         List<Shop> result = new ArrayList<>();
-        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop ORDER BY id;");
+        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop WHERE user_id = ? ORDER BY id;", user_id);
         while (rowSet.next()) {
             result.add(new Shop(
                     rowSet.getLong("id"),
@@ -50,9 +50,9 @@ public class ShopRepositoryImpl implements ShopRepository<Shop> {
     }
 
     @Override
-    public Shop getShop(long id) {
+    public Shop getShop(long user_id, long id) {
         List<Shop> result = new ArrayList<>();
-        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop WHERE id = ?;", id);
+        SqlRowSet rowSet = jdbcOperations.queryForRowSet("SELECT * FROM shop WHERE user_id = ? AND id = ?;", user_id, id);
         while (rowSet.next()) {
             result.add(new Shop(
                     rowSet.getLong("id"),

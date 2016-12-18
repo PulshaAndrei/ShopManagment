@@ -23,9 +23,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public boolean create(Product product) {
+    public boolean create(long user_id, Product product) {
         try {
-            productRepository.create(product);
+            productRepository.create(user_id, product);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -34,9 +34,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean update(Product product) {
+    public boolean update(long user_id, Product product) {
         try {
-            productRepository.update(product);
+            productRepository.update(user_id, product);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -45,9 +45,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean delete(long shop_id, long id) {
+    public boolean delete(long user_id, long shop_id, long id) {
         try {
-            productRepository.delete(shop_id, id);
+            productRepository.delete(user_id, shop_id, id);
             return true;
         } catch (Exception e) {
             LOG.error("ERROR SAVING DATA: " + e.getMessage(), e);
@@ -56,12 +56,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts(long shop_id) {
-        return productRepository.getProducts(shop_id);
+    public List<Product> getProducts(long user_id, long shop_id) {
+        return productRepository.getProducts(user_id, shop_id);
     }
 
     @Override
-    public Product getProduct(long shop_id, long id) {
-        return productRepository.getProduct(shop_id, id);
+    public Product getProduct(long user_id, long shop_id, long id) {
+        return productRepository.getProduct(user_id, shop_id, id);
     }
 }

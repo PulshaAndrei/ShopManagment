@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface ProductRepository<V extends DomainObject> {
 
-    List<Product> getProducts(long shop_id);
+    List<Product> getProducts(long user_id, long shop_id);
 
-    Product getProduct(long shop_id, long id);
+    Product getProduct(long user_id, long shop_id, long id);
 
-    void create(V object);
+    void create(long user_id, V object);
 
-    void update(V object);
+    void update(long user_id, V object);
 
-    void delete(long shop_id, long id);
+    void delete(long user_id, long shop_id, long id);
 }

@@ -25,11 +25,15 @@ public class ShopController extends ExceptionHandlerController {
     @Qualifier("shopService")
     private ShopService shopService;
 
+    @Autowired
+    private AccountController accountController;
+
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> getShops() throws RestException {
+    Map<String, Object> getShops(@RequestHeader(value="Authorization") String token) throws RestException {
+        long user_id = accountController.getUserId(token);
         try {
-            List<Shop> result = shopService.getShops();
+            List<Shop> result = shopService.getShops(user_id);
             return Ajax.successResponse(result);
         } catch (Exception e) {
             throw new RestException(e);
@@ -38,9 +42,11 @@ public class ShopController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/shop/{shop_id}", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> getShop(@PathVariable("shop_id") long id) throws RestException {
+    Map<String, Object> getShop(@RequestHeader(value="Authorization") String token,
+                                @PathVariable("shop_id") long id) throws RestException {
+        long user_id = accountController.getUserId(token);
         try {
-            Shop result = shopService.getShop(id);
+            Shop result = shopService.getShop(user_id, id);
             return Ajax.successResponse(result);
         } catch (Exception e) {
             throw new RestException(e);
@@ -49,12 +55,14 @@ public class ShopController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/shop", method = RequestMethod.POST, headers = {"Content-type=application/json"} )
     public @ResponseBody
-    Map<String, Object> create(@RequestBody Shop shop)  throws RestException {
+    Map<String, Object> create(@RequestHeader(value="Authorization") String token,
+                               @RequestBody Shop shop)  throws RestException {
+        long user_id = accountController.getUserId(token);
         try {
             if (shop.getName() == null || shop.getName() == "") {
                 return Ajax.errorResponse("Field name can't be empty.");
             }
-            shopService.create(shop);
+            shopService.create(user_id, shop);
             return Ajax.emptyResponse();
         } catch (Exception e) {
             throw new RestException(e);
@@ -63,13 +71,16 @@ public class ShopController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/shop/{shop_id}", method = RequestMethod.PUT, headers = {"Content-type=application/json"} )
     public @ResponseBody
-    Map<String, Object> update(@PathVariable("shop_id") long id, @RequestBody Shop shop)  throws RestException {
+    Map<String, Object> update(@RequestHeader(value="Authorization") String token,
+                               @PathVariable("shop_id") long id,
+                               @RequestBody Shop shop)  throws RestException {
+        long user_id = accountController.getUserId(token);
         try {
             if (shop.getName() == null || shop.getName() == "") {
                 return Ajax.errorResponse("Field name can't be empty.");
             }
             shop.setId(id);
-            shopService.update(shop);
+            shopService.update(user_id, shop);
             return Ajax.emptyResponse();
         } catch (Exception e) {
             throw new RestException(e);
@@ -78,12 +89,15 @@ public class ShopController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/shop/{shop_id}", method = RequestMethod.DELETE )
     public @ResponseBody
-    Map<String, Object> delete(@PathVariable("shop_id") long id)  throws RestException {
+    Map<String, Object> delete(@RequestHeader(value="Authorization") String token,
+                               @PathVariable("shop_id") long id)  throws RestException {
+        long user_id = accountController.getUserId(token);
         try {
-            shopService.delete(id);
+            shopService.delete(user_id, id);
             return Ajax.emptyResponse();
         } catch (Exception e) {
             throw new RestException(e);
         }
     }
+
 }

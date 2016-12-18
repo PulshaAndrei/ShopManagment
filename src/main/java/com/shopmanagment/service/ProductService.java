@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface ProductService {
 
-    public boolean create(Product product);
+    public boolean create(long user_id, Product product);
 
-    public boolean update(Product product);
+    public boolean update(long user_id, Product product);
 
-    public boolean delete(long shop_id, long id);
+    public boolean delete(long user_id, long shop_id, long id);
 
-    public List<Product> getProducts(long shop_id);
+    public List<Product> getProducts(long user_id, long shop_id);
 
-    public Product getProduct(long shop_id, long id);
+    public Product getProduct(long user_id, long shop_id, long id);
 }

@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface ShopService {
 
-    public boolean create(Shop shop);
+    public boolean create(long user_id, Shop shop);
 
-    public boolean update(Shop shop);
+    public boolean update(long user_id, Shop shop);
 
-    public boolean delete(long id);
+    public boolean delete(long user_id, long id);
 
-    public List<Shop> getShops();
+    public List<Shop> getShops(long user_id);
 
-    public Shop getShop(long id);
+    public Shop getShop(long user_id, long id);
 }

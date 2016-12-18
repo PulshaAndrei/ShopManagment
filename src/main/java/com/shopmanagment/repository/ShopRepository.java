@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface ShopRepository<V extends DomainObject> {
 
-    List<Shop> getShops();
+    List<Shop> getShops(long user_id);
 
-    Shop getShop(long id);
+    Shop getShop(long user_id, long id);
 
-    void create(V object);
+    void create(long user_id, V object);
 
-    void update(V object);
+    void update(long user_id, V object);
 
-    void delete(long id);
+    void delete(long user_id, long id);
 }
