@@ -4,7 +4,7 @@ databaseChangeLog:
       author: pulsha.andrei
       changes:
         - dropTable:
-          tableName: shop
+            tableName: shop
         - createTable:
             tableName: shop
             columns:
