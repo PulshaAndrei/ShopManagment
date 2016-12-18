@@ -3,6 +3,8 @@ databaseChangeLog:
       id: 2
       author: pulsha.andrei
       changes:
+        - dropTable:
+          tableName: shop
         - createTable:
             tableName: shop
             columns:
