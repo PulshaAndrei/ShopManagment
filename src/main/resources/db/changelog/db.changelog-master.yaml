@@ -5,6 +5,8 @@ databaseChangeLog:
       changes:
         - dropTable:
             tableName: shop
+        - dropTable:
+            tableName: product
         - createTable:
             tableName: shop
             columns:
