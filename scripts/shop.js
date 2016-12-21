@@ -1,8 +1,11 @@
-angular.module('shop', [])
+angular.module('shop', ['ngCookies'])
 
   .config(function($routeProvider) {
     $routeProvider.
       when('/', {controller: ShopListCtrl, templateUrl: 'list_shop.html'}).
+      when('/login', {controller: LoginCtrl, templateUrl: 'login.html'}).
+      when('/signup', {controller: SignUpCtrl, templateUrl: 'signup.html'}).
+      when('/logout', {controller: LogoutCtrl, templateUrl: 'login.html'}).
       when('/new_shop', {controller: CreateShopCtrl, templateUrl: 'edit_shop.html'}).
       when('/edit_shop/:shopId', {controller: EditShopCtrl, templateUrl: 'edit_shop.html'}).
       when('/destroy_shop/:shopId', {controller: DestroyShopCtrl, templateUrl: 'list_shop.html'}).
@@ -15,7 +18,61 @@ angular.module('shop', [])
 
 var serverURL = "https://shopmanagment.herokuapp.com/" //"http://localhost:8080/"
 
-function ShopListCtrl($scope, $rootScope, $location, $http) {
+function LogoutCtrl($scope, $rootScope, $location, $http, $cookieStore) {
+  $cookieStore.remove('token');
+  $location.path('/');
+  document.getElementById('logoutButton').style.display = "none";
+}
+
+function LoginCtrl($scope, $rootScope, $location, $http, $cookieStore) {
+  $cookieStore.remove('token');
+  $rootScope.shops = []
+  $scope.login = function() {
+    var authData = {
+      username: $scope.username,
+      password: $scope.password
+    }
+    $http.put(serverURL+'auth/login', authData).success(function(data) {
+      if (data["data"]) {
+        $cookieStore.put('token', data["data"]);
+        $http.defaults.headers.common.Authorization = $cookieStore.get('token');
+        $location.path('/');
+        document.getElementById('logoutButton').style.display = "block";        
+      }
+      else {
+        $scope.error = data["message"]
+      }
+    });
+  }
+}
+
+function SignUpCtrl($scope, $rootScope, $location, $http, $cookieStore) {
+  $cookieStore.remove('token');
+  $rootScope.shops = []
+  $scope.signup = function() {
+    var authData = {
+      username: $scope.username,
+      password: $scope.password
+    }
+    $http.post(serverURL+'auth/signup', authData).success(function(data) {
+      if (data["data"]) {
+        $http.put(serverURL+'auth/login', authData).success(function(data) {
+          $cookieStore.put('token', data["data"]);
+          $http.defaults.headers.common.Authorization = $cookieStore.get('token');
+          $location.path('/');
+          document.getElementById('logoutButton').style.display = "block";
+        });       
+      }
+      else {
+        $scope.error = data["message"]
+      }
+    });
+  }
+}
+
+function ShopListCtrl($scope, $rootScope, $location, $http, $cookieStore) {
+  if (!$cookieStore.get('token')) { $location.path('/login'); return; };
+  $http.defaults.headers.common.Authorization = $cookieStore.get('token');
   $http.get(serverURL+'shop').success(function(data) {
     $rootScope.shops = data["data"];
   });
@@ -72,7 +129,7 @@ function ProductsCtrl($scope, $location, $rootScope, $routeParams, $http){
   if (!$rootScope.shops) { $location.path('/'); return; };
   var index = $rootScope.shops.findIndex(function(el){ return el.id == $routeParams.shopId });
   $scope.shop = clone($rootScope.shops[index]);
-
+  $rootScope.products = []
   $http.get(serverURL+'product/'+$scope.shop.id).success(function(data) {
     $rootScope.products = data["data"];
   }); 

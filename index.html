@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-cookies.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsiJEf9o-IZoIYkiGPkMnVj_NxRbjVieg"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -14,20 +15,23 @@
 </head>
 <body>
 	<div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="#/" class="navbar-brand">Shops</a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/">Информация</a></li>
-            <li><a href="#/">Контакты</a></li>
-          </ul>
-        </div>
+    <div class="container">
+      <div class="navbar-header">
+        <a href="#/" class="navbar-brand">Shops</a>
+      </div>
+      <div class="navbar-collapse collapse" id="navbar-main">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/logout" id="logoutButton">Выход</a></li>
+        </ul>
       </div>
     </div>
-    <div class="container">
-    	<div class="page-header" ng-view></div>
-    </div>	
+  </div>
+  <div class="container">
+    <div class="page-header" ng-view></div>
+  </div>	
+  <script type="text/javascript">
+    if (window.location.hash == '#/login') document.getElementById('logoutButton').style.display = "none";
+    else document.getElementById('logoutButton').style.display = "block";
+  </script>
 </body>
 </html>

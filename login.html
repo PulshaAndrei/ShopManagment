@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h1>Вход</h1>
+</div>
+<form name="myForm" class="form-horizontal">
+  <fieldset>
+    <div class="form-group" ng-class="{'has-error': myForm.username.$invalid,'has-success': myForm.username.$valid}">
+      <label class="col-lg-2 control-label">Логин</label>
+      <div class="col-lg-5">
+        <input type="text" class="form-control" name="username" ng-model="username" required>
+      </div>     
+    </div>
+   
+    <div class="form-group" ng-class="{'has-error': myForm.password.$invalid,'has-success': myForm.password.$valid}">
+      <label class="col-lg-2 control-label">Пароль</label>
+      <div class="col-lg-5">
+        <input type="password" class="form-control" name="password" ng-model="password" required>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="alert alert-danger col-lg-5 col-lg-offset-2" role="alert" ng-show="error">{{error}}</div>
+    </div>
+   
+    <br>
+    <div class="row">
+      <button ng-click="login()" ng-disabled="myForm.$invalid" class="btn btn-success col-lg-3 col-lg-offset-3">Войти</button>
+    </div>
+    <div class="row">
+      </br>
+      <a href="#/signup" class="btn btn-default col-lg-3 col-lg-offset-3 btn-xs">Нет аккаунта? Зарегистрироваться</a>
+    </div> 
+  </fieldset>  
+</form>
